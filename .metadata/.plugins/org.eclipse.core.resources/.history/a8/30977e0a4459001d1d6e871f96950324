@@ -1,0 +1,30 @@
+package com.shop.app.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "Users")
+public class User {
+
+	@Id
+	private String userId;
+	private String userFname;
+	private String userMname;
+	private String userLname;
+	private String userPhoneNo;
+	private String userEmail;
+	private String userAddress1;
+	private String userAddress2;
+	private String usercity;
+	private String userState;
+	private String userCountry;
+
+}

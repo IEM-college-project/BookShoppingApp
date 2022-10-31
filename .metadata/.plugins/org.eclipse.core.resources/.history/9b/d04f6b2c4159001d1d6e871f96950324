@@ -1,0 +1,5 @@
+package com.shop.app.entity;
+
+public class User {
+
+}
