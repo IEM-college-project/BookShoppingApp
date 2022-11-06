@@ -1,2 +1,0 @@
-# BookShoppingApp
-Final Project

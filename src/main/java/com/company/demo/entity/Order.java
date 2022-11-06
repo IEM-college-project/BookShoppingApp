@@ -47,4 +47,11 @@ public class Order {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
 	private List<OrderTrack> orderTracks = new ArrayList<>();
 
+	public Order(boolean status, Customer customer, Address address) {
+		super();
+		this.status = status;
+		this.customer = customer;
+		this.address = address;
+	}
+
 }

@@ -44,7 +44,7 @@ public class Address {
 	@Column(name = "pin_code")
 	private String pinCode;
 
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "addresses")
+	@ManyToMany(mappedBy = "addresses")
 	private List<Customer> customers = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
