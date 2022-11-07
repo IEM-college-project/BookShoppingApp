@@ -9,7 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,11 +33,17 @@ public class Address {
 	@Column(name = "address_id")
 	private Long addressId;
 
+	@Column(name = "name")
+	private String name;
+
 	@Column(name = "state")
 	private String state;
 
 	@Column(name = "city")
 	private String city;
+
+	@Column(name = "locality")
+	private String locality;
 
 	@Column(name = "address_line")
 	private String addressLine;
@@ -44,18 +51,30 @@ public class Address {
 	@Column(name = "pin_code")
 	private String pinCode;
 
-	@ManyToMany(mappedBy = "addresses")
-	private List<Customer> customers = new ArrayList<>();
+	@Column(name = "phone")
+	private String phone;
+
+	@Column(name = "alternate_phone")
+	private String alternatePhone;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "customer_id")
+	private Customer customers;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
 	private List<Order> orders = new ArrayList<>();
 
-	public Address(String state, String city, String addressLine, String pinCode) {
+	public Address(String name, String state, String city, String locality, String addressLine, String pinCode,
+			String phone, String alternatePhone) {
 		super();
+		this.name = name;
 		this.state = state;
 		this.city = city;
+		this.locality = locality;
 		this.addressLine = addressLine;
 		this.pinCode = pinCode;
+		this.phone = phone;
+		this.alternatePhone = alternatePhone;
 	}
 
 }

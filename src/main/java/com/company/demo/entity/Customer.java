@@ -9,9 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -49,21 +46,20 @@ public class Customer {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "customer_address", joinColumns = { @JoinColumn(name = "customer_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "address_id") })
+	@Column(name = "password")
+	private String password;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customers")
 	private List<Address> addresses = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-	private List<Order> orders = new ArrayList<>();
-
-	public Customer(String firstName, String lastName, String gender, String phone, String email) {
+	public Customer(String firstName, String lastName, String gender, String phone, String email, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.phone = phone;
 		this.email = email;
+		this.password = password;
 	}
 
 }

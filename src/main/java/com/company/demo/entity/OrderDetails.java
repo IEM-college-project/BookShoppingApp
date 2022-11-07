@@ -1,8 +1,8 @@
 package com.company.demo.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,23 +21,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "track")
-public class OrderTrack {
+@Table(name = "order_details")
+public class OrderDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "track_id")
-	private Long trackId;
+	@Column(name = "details_id")
+	private Long detailsId;
 
 	@Column(name = "quantity")
 	private Long quantity;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id")
-	private Order order;
-
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "book_id")
 	private Book book;
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "order_id")
+	private Order order;
 
 }

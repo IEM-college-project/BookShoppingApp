@@ -37,21 +37,15 @@ public class Order {
 	private boolean status;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "customer_id")
-	private Customer customer;
-
-	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-	private List<OrderTrack> orderTracks = new ArrayList<>();
+	private List<OrderDetails> orderDetails = new ArrayList<>();
 
-	public Order(boolean status, Customer customer, Address address) {
+	public Order(boolean status) {
 		super();
 		this.status = status;
-		this.customer = customer;
-		this.address = address;
 	}
 
 }
