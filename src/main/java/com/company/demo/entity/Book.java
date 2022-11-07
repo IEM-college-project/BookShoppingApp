@@ -52,7 +52,7 @@ public class Book {
 	private List<Author> authors = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
-	private List<OrderTrack> orderTracks = new ArrayList<>();
+	private List<OrderDetails> orderDetails = new ArrayList<>();
 
 	public Book(String bookName, Long pageCount, Double price, Long stock) {
 		super();
