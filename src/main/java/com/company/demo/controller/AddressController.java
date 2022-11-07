@@ -40,7 +40,7 @@ public class AddressController {
 		if (customer == null)
 			return "INVALID CUSTOMER ID " + customerId;
 
-		address.setCustomers(customer);
+		address.setCustomer(customer);
 		customer.getAddresses().add(address);
 		this.customerRepository.save(customer);
 		return "ADDRESS CREATED OF CUSTOMER WITH ID " + customerId;

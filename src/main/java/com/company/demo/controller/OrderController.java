@@ -24,6 +24,8 @@ import com.company.demo.repository.OrderRepository;
 @RequestMapping("/api/order")
 public class OrderController {
 
+	private static int quantityCount = 0;
+
 	@Autowired
 	private BookRepository bookRepository;
 
@@ -41,24 +43,28 @@ public class OrderController {
 	 * @return
 	 */
 	@PostMapping("/create-order")
-	public String createOrder(@RequestParam Long addressId, @RequestBody List<Long> bookIds) {
-		Order order = new Order(false);
-		List<Book> books = new ArrayList<>();
+	public String createOrder(@RequestParam Long addressId, @RequestBody List<List<Long>> orders) {
 		Address address = this.addressRepository.findById(addressId).orElse(null);
 
 		if (address == null)
 			return "INVALID ADDRESS ID " + addressId;
 
-		order.setAddress(address);
+		Order order = new Order(false, address);
 		this.orderRepository.save(order);
-		this.addressRepository.save(address);
 
-		bookIds.forEach(bookId -> {
+		List<Book> books = new ArrayList<>();
+		orders.get(0).forEach(bookId -> {
 			books.add(this.bookRepository.findById(bookId).orElse(null));
 		});
 
+		List<Long> quantities = new ArrayList<>();
+		orders.get(1).forEach(quantity -> {
+			quantities.add(quantity);
+		});
+
+		quantityCount = 0;
 		books.forEach(book -> {
-			book.getOrderDetails().add(new OrderDetails(null, 3L, book, order));
+			book.getOrderDetails().add(new OrderDetails(quantities.get(quantityCount++), book, order));
 		});
 
 		this.bookRepository.saveAll(books);

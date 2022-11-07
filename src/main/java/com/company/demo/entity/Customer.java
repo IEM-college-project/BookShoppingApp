@@ -49,7 +49,7 @@ public class Customer {
 	@Column(name = "password")
 	private String password;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customers")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Address> addresses = new ArrayList<>();
 
 	public Customer(String firstName, String lastName, String gender, String phone, String email, String password) {

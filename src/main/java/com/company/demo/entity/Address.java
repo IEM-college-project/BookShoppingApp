@@ -57,15 +57,15 @@ public class Address {
 	@Column(name = "alternate_phone")
 	private String alternatePhone;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "customer_id")
-	private Customer customers;
+	private Customer customer;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
 	private List<Order> orders = new ArrayList<>();
 
 	public Address(String name, String state, String city, String locality, String addressLine, String pinCode,
-			String phone, String alternatePhone) {
+			String phone, String alternatePhone, Customer customer) {
 		super();
 		this.name = name;
 		this.state = state;
@@ -75,6 +75,7 @@ public class Address {
 		this.pinCode = pinCode;
 		this.phone = phone;
 		this.alternatePhone = alternatePhone;
+		this.customer = customer;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.company.demo;
 
+import java.util.Arrays;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +30,11 @@ public class MtomApplication {
 		Author aniket = new Author("Aniket", "aniket@gmail.com");
 		Author amitava = new Author("Amitava", "amitava@gmail.com");
 
-		java.getAuthors().add(aniket);
-		java.getAuthors().add(amitava);
-		python.getAuthors().add(amitava);
+		aniket.setBooks(Arrays.asList(java));
+		amitava.setBooks(Arrays.asList(java, python));
 
-		aniket.getBooks().add(java);
-		amitava.getBooks().add(java);
-		amitava.getBooks().add(python);
+		python.setAuthors(Arrays.asList(amitava));
+		java.setAuthors(Arrays.asList(aniket, amitava));
 
 		this.bookRepository.save(java);
 		this.bookRepository.save(python);

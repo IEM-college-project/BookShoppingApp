@@ -28,8 +28,8 @@ public class CustomerController {
 	 */
 	@PostMapping("/create-customer")
 	public String createCustomer(@RequestBody Customer customer) {
-		Customer newCustomer = this.customerRepository.save(customer);
-		Long customerId = newCustomer.getCustomerId();
+		customer = this.customerRepository.save(customer);
+		Long customerId = customer.getCustomerId();
 		return "CUSTOMER OF ID " + customerId + " CREATED";
 	}
 
@@ -52,7 +52,6 @@ public class CustomerController {
 		updatedCustomer.setGender(customer.getGender());
 		updatedCustomer.setPhone(customer.getPhone());
 		updatedCustomer.setEmail(customer.getEmail());
-		updatedCustomer.setPassword(customer.getPassword());
 		updatedCustomer = this.customerRepository.save(updatedCustomer);
 		return "CUSTOMER OF ID " + customerId + " UPDATED";
 	}
