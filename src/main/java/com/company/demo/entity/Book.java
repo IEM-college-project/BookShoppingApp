@@ -41,4 +41,60 @@ public class Book {
 			@JoinColumn(name = "author_id") })
 
 	private List<Author> authors;
+	public Long getBookId() {
+		return bookId;
+	}
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
+	}
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+	public Long getPageCount() {
+		return pageCount;
+	}
+	public void setPageCount(Long pageCount) {
+		this.pageCount = pageCount;
+	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	public Long getStock() {
+		return stock;
+	}
+	public void setStock(Long stock) {
+		this.stock = stock;
+	}
+	public List<Author> getAuthors() {
+		return authors;
+	}
+	public void setAuthors(List<Author> authors) {
+		this.authors = authors;
+	}
+	public Book() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Book(Long bookId, String bookName, Long pageCount, Double price, Long stock, List<Author> authors) {
+		super();
+		this.bookId = bookId;
+		this.bookName = bookName;
+		this.pageCount = pageCount;
+		this.price = price;
+		this.stock = stock;
+		this.authors = authors;
+	}
+	@Override
+	public String toString() {
+		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", pageCount=" + pageCount + ", price=" + price
+				+ ", stock=" + stock + ", authors=" + authors + "]";
+	}
+	
+	
 }

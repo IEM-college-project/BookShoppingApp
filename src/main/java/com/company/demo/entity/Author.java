@@ -31,5 +31,47 @@ public class Author {
 	private String authorEmail;
 	@ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
 	private List<Book> books;
-
+	public Long getAuthorId() {
+		return authorId;
+	}
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
+	}
+	public String getAuthorName() {
+		return authorName;
+	}
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+	public String getAuthorEmail() {
+		return authorEmail;
+	}
+	public void setAuthorEmail(String authorEmail) {
+		this.authorEmail = authorEmail;
+	}
+	public List<Book> getBooks() {
+		return books;
+	}
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+	public Author() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Author(Long authorId, String authorName, String authorEmail, List<Book> books) {
+		super();
+		this.authorId = authorId;
+		this.authorName = authorName;
+		this.authorEmail = authorEmail;
+		this.books = books;
+	}
+	@Override
+	public String toString() {
+		return "Author [authorId=" + authorId + ", authorName=" + authorName + ", authorEmail=" + authorEmail
+				+ ", books=" + books + "]";
+	}
+    
+	
+	
 }
