@@ -1,6 +1,6 @@
 package com.company.demo;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 
@@ -10,35 +10,42 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.company.demo.entity.Author;
 import com.company.demo.entity.Book;
+import com.company.demo.repository.AuthorRepository;
 import com.company.demo.repository.BookRepository;
 
 @SpringBootApplication
 public class MtomApplication {
-
+	@Autowired
+	private AuthorRepository authorRepository;
 	@Autowired
 	private BookRepository bookRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MtomApplication.class, args);
+
 	}
 
 	@PostConstruct
 	public void test() {
-		Book java = new Book("Learn Java", 990L, 1250.00, 120L);
-		Book python = new Book("Learn Python", 1100L, 950.00, 90L);
+		Book java = new Book(null, "Java", 800L, 750.00, 100L, new ArrayList<>());
+		Book python = new Book(null, "Python", 700L, 850.00, 200L, new ArrayList<>());
 
-		Author aniket = new Author("Aniket", "aniket@gmail.com");
-		Author amitava = new Author("Amitava", "amitava@gmail.com");
+		Author gosling = new Author(null, "Gosling", "g@mail", new ArrayList<>());
+		Author rossum = new Author(null, "Rossum", "r@mail", new ArrayList<>());
 
-		aniket.setBooks(Arrays.asList(java));
-		amitava.setBooks(Arrays.asList(java, python));
+		java.getAuthors().add(gosling);
+		python.getAuthors().add(gosling);
+		python.getAuthors().add(rossum);
 
-		python.setAuthors(Arrays.asList(amitava));
-		java.setAuthors(Arrays.asList(aniket, amitava));
+		gosling.getBooks().add(java);
+		gosling.getBooks().add(python);
+		rossum.getBooks().add(python);
 
-		this.bookRepository.save(java);
-		this.bookRepository.save(python);
-		System.out.println("All books and authors are saved");
+		bookRepository.save(java);
+		bookRepository.save(python);
+		authorRepository.save(gosling);
+		authorRepository.save(rossum);
+
 	}
 
 }
