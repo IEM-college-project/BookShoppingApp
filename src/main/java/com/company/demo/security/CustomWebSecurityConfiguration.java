@@ -16,28 +16,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.company.demo.jwt.JwtAuthenticationEntryPoint;
 import com.company.demo.jwt.JwtAuthenticationFilter;
-import com.flat.app.service.CustomUserDetailsService;
+import com.company.demo.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 @SuppressWarnings("deprecation")
 public class CustomWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	// ################## Permit All ##################
-	private static final String FLAT_ROOT = "/api/flat";
-	private static final String USER_ROOT = "/api/user";
-	private static final String OWNER_ROOT = "/api/owner";
-
 	private static final String H2 = "/h2db/**";
-	private static final String AUTH = "/api/user/auth/**";
-	private static final String FEEDBACK = "/api/feedback/**";
-	private static final String REGISTER = "/api/user/register";
-	private static final String FLAT_LIST = "/api/flat/get-all-flats";
-	// ################## Permit All ##################
-
-	// ################## ADMIN ##################
-	private static final String USER_LIST = "/api/user/get-all-users";
-	// ################## ADMIN ##################
 
 	@Autowired
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -52,9 +38,7 @@ public class CustomWebSecurityConfiguration extends WebSecurityConfigurerAdapter
 	protected void configure(HttpSecurity http) throws Exception {
 //		super.configure(http);
 		http.csrf().ignoringAntMatchers(H2).and().headers().frameOptions().sameOrigin();
-		http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpHeaders.ALLOW).permitAll()
-				.antMatchers(USER_LIST).hasRole("ADMIN").antMatchers("/", FLAT_ROOT, USER_ROOT, OWNER_ROOT).permitAll()
-				.antMatchers(H2, AUTH, FEEDBACK, REGISTER, FLAT_LIST).permitAll().anyRequest().authenticated();
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpHeaders.ALLOW).permitAll();
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint);
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

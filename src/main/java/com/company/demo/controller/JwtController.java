@@ -1,7 +1,5 @@
 package com.company.demo.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.company.demo.entity.User;
 import com.company.demo.jwt.JwtRequest;
 import com.company.demo.jwt.JwtResponse;
 import com.company.demo.jwt.JwtUtil;
-import com.flat.app.exception.UserNotFoundException;
-import com.flat.app.service.CustomUserDetailsService;
-import com.flat.app.service.UserService;
+import com.company.demo.repository.UserRepository;
+import com.company.demo.service.CustomUserDetailsService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -30,7 +28,7 @@ public class JwtController {
 	private JwtUtil jwtUtil;
 
 	@Autowired
-	private UserService userService;
+	private UserRepository userRepository;
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -45,19 +43,19 @@ public class JwtController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> generateToken(@RequestBody @Valid JwtRequest jwtRequest) throws UserNotFoundException {
-		String username = jwtRequest.getUsername();
+	public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) {
+		String phone = jwtRequest.getPhone();
 		String password = jwtRequest.getPassword();
 
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, password));
 		} catch (Exception e) {
 			System.out.println("----- " + e.getMessage() + " -----");
 			return ResponseEntity.status(401).body("Bad Credential");
 		}
 
-		UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
-		User user = userService.getUserById(username);
+		UserDetails userDetails = customUserDetailsService.loadUserByUsername(phone);
+		User user = userRepository.findByPhone(phone).orElse(null);
 		String jwt = jwtUtil.generateToken(userDetails);
 		System.out.println("----- JWT: " + jwt + " -----");
 		return ResponseEntity.status(201).body(JwtResponse.builder().user(user).jwt(jwt).build());

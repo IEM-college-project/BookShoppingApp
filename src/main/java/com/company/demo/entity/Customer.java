@@ -46,20 +46,16 @@ public class Customer {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "password")
-	private String password;
-
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customers")
 	private List<Address> addresses = new ArrayList<>();
 
-	public Customer(String firstName, String lastName, String gender, String phone, String email, String password) {
+	public Customer(String firstName, String lastName, String gender, String phone, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.phone = phone;
 		this.email = email;
-		this.password = password;
 	}
 
 }

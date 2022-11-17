@@ -52,7 +52,6 @@ public class CustomerController {
 		updatedCustomer.setGender(customer.getGender());
 		updatedCustomer.setPhone(customer.getPhone());
 		updatedCustomer.setEmail(customer.getEmail());
-		updatedCustomer.setPassword(customer.getPassword());
 		updatedCustomer = this.customerRepository.save(updatedCustomer);
 		return "CUSTOMER OF ID " + customerId + " UPDATED";
 	}
