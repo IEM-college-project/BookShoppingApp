@@ -40,4 +40,11 @@ public class OrderDetails {
 	@JoinColumn(name = "order_id")
 	private Order order;
 
+	public OrderDetails(Long quantity, Book book, Order order) {
+		super();
+		this.quantity = quantity;
+		this.book = book;
+		this.order = order;
+	}
+
 }

@@ -48,6 +48,9 @@ public class Address {
 	@Column(name = "address_line")
 	private String addressLine;
 
+	@Column(name = "landmark")
+	private String landmark;
+
 	@Column(name = "pin_code")
 	private String pinCode;
 
@@ -57,24 +60,26 @@ public class Address {
 	@Column(name = "alternate_phone")
 	private String alternatePhone;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "customer_id")
-	private Customer customers;
+	private Customer customer;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
 	private List<Order> orders = new ArrayList<>();
 
-	public Address(String name, String state, String city, String locality, String addressLine, String pinCode,
-			String phone, String alternatePhone) {
+	public Address(String name, String state, String city, String locality, String addressLine, String landmark,
+			String pinCode, String phone, String alternatePhone, Customer customer) {
 		super();
 		this.name = name;
 		this.state = state;
 		this.city = city;
 		this.locality = locality;
 		this.addressLine = addressLine;
+		this.landmark = landmark;
 		this.pinCode = pinCode;
 		this.phone = phone;
 		this.alternatePhone = alternatePhone;
+		this.customer = customer;
 	}
 
 }

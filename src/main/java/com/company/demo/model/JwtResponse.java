@@ -1,4 +1,4 @@
-package com.company.demo.jwt;
+package com.company.demo.model;
 
 import com.company.demo.entity.User;
 

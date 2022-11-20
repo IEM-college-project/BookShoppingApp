@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -46,16 +48,21 @@ public class Customer {
 	@Column(name = "email")
 	private String email;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customers")
+	@OneToOne
+	@JoinColumn(name = "username")
+	private User user;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Address> addresses = new ArrayList<>();
 
-	public Customer(String firstName, String lastName, String gender, String phone, String email) {
+	public Customer(String firstName, String lastName, String gender, String phone, String email, User user) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.phone = phone;
 		this.email = email;
+		this.user = user;
 	}
 
 }

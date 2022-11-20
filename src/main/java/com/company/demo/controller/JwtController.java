@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.company.demo.entity.User;
-import com.company.demo.jwt.JwtRequest;
-import com.company.demo.jwt.JwtResponse;
 import com.company.demo.jwt.JwtUtil;
+import com.company.demo.model.JwtRequest;
+import com.company.demo.model.JwtResponse;
 import com.company.demo.repository.UserRepository;
 import com.company.demo.service.CustomUserDetailsService;
 
@@ -44,18 +44,18 @@ public class JwtController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) {
-		String phone = jwtRequest.getPhone();
+		String username = jwtRequest.getUsername();
 		String password = jwtRequest.getPassword();
 
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phone, password));
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		} catch (Exception e) {
 			System.out.println("----- " + e.getMessage() + " -----");
 			return ResponseEntity.status(401).body("Bad Credential");
 		}
 
-		UserDetails userDetails = customUserDetailsService.loadUserByUsername(phone);
-		User user = userRepository.findByPhone(phone).orElse(null);
+		UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+		User user = userRepository.findById(username).orElse(null);
 		String jwt = jwtUtil.generateToken(userDetails);
 		System.out.println("----- JWT: " + jwt + " -----");
 		return ResponseEntity.status(201).body(JwtResponse.builder().user(user).jwt(jwt).build());

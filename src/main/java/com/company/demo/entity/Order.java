@@ -1,6 +1,7 @@
 package com.company.demo.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,19 +36,32 @@ public class Order {
 	@Column(name = "order_id")
 	private Long orderId;
 
-	@Column(name = "status")
-	private boolean status;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@Column(name = "order_date")
+	private Date orderDate = new Date();
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@Column(name = "shipping_date")
+	private Date shippingDate = new Date();
+
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@Column(name = "delivery_date")
+	private Date deliveryDate = new Date();
+
+	@Column(name = "delivered")
+	private boolean delivered;
+
+	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
 	private List<OrderDetails> orderDetails = new ArrayList<>();
 
-	public Order(boolean status) {
+	public Order(boolean delivered, Address address) {
 		super();
-		this.status = status;
+		this.delivered = delivered;
+		this.address = address;
 	}
 
 }
