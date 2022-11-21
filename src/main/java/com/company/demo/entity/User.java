@@ -1,9 +1,13 @@
 package com.company.demo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +32,9 @@ public class User {
 
 	@Column(name = "user_role")
 	private String userRole;
+
+	@JsonBackReference
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	private Customer customer;
 
 }
