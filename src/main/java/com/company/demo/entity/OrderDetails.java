@@ -2,7 +2,6 @@ package com.company.demo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,13 +33,12 @@ public class OrderDetails {
 	@Column(name = "quantity")
 	private Long quantity;
 
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne
 	@JoinColumn(name = "book_id")
 	private Book book;
 
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
 

@@ -8,7 +8,7 @@ import com.company.demo.exception.NoEntitiesException;
 
 public interface OrderService {
 
-	public Order createOrder(Long addressId, List<List<Long>> orders);
+	public Order createOrder(Long addressId, List<List<Long>> orders) throws EntityNotFoundException;
 
 	public List<Order> readAllOrder() throws NoEntitiesException;
 

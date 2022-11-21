@@ -55,7 +55,7 @@ public class AddressController {
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<?> deleteAddressById(@PathVariable Long addressId) throws EntityNotFoundException {
+	public ResponseEntity<?> deleteAddressById(@PathVariable("id") Long addressId) throws EntityNotFoundException {
 		String message = this.addressService.deleteAddressById(addressId);
 		return ResponseEntity.status(200).body(message);
 	}
