@@ -65,6 +65,7 @@ public class AddressServiceImpl implements AddressService {
 		updatedAddress.setPinCode(address.getPinCode());
 		updatedAddress.setPhone(address.getPhone());
 		updatedAddress.setAlternatePhone(address.getAlternatePhone());
+		this.addressRepository.save(updatedAddress);
 		return updatedAddress;
 	}
 

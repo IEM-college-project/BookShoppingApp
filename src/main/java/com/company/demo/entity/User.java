@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,7 +31,6 @@ public class User {
 	@Column(name = "user_role")
 	private String userRole;
 
-	@JsonBackReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	private Customer customer;
 

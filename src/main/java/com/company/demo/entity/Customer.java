@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,6 +50,7 @@ public class Customer {
 	@Column(name = "email")
 	private String email;
 
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "username")
 	private User user;

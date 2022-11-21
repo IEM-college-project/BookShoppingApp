@@ -33,13 +33,13 @@ public class UserController {
 		return ResponseEntity.status(201).body(createdUser);
 	}
 
-	@GetMapping("/fetch-all-user")
+	@GetMapping("/fetch-all")
 	public ResponseEntity<?> readAllUser() throws NoEntitiesException {
 		List<User> users = this.userService.readAllUser();
 		return ResponseEntity.status(200).body(users);
 	}
 
-	@GetMapping("/fetch-user/{username}")
+	@GetMapping("/fetch/{username}")
 	public ResponseEntity<?> readUserById(@PathVariable String username) throws EntityNotFoundException {
 		User user = this.userService.readUserById(username);
 		return ResponseEntity.status(200).body(user);
