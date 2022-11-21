@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -51,6 +53,7 @@ public class Order {
 	@Column(name = "delivered")
 	private boolean delivered;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
