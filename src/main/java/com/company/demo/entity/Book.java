@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -51,6 +53,7 @@ public class Book {
 			@JoinColumn(name = "author_id") })
 	private List<Author> authors = new ArrayList<>();
 
+	@JsonBackReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
 	private List<OrderDetails> orderDetails = new ArrayList<>();
 

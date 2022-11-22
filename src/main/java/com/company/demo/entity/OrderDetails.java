@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,11 +34,20 @@ public class OrderDetails {
 	@Column(name = "quantity")
 	private Long quantity;
 
+<<<<<<< HEAD:src/main/java/com/company/demo/entity/OrderDetails.java
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "book_id")
 	private Book book;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+=======
+	@ManyToOne
+	@JoinColumn(name = "book_id")
+	private Book book;
+
+	@JsonBackReference
+	@ManyToOne
+>>>>>>> bugfix:src/main/java/com/company/demo/entity/OrderTrack.java
 	@JoinColumn(name = "order_id")
 	private Order order;
 

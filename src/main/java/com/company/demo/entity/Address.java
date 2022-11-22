@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,6 +50,9 @@ public class Address {
 	@Column(name = "address_line")
 	private String addressLine;
 
+	@Column(name = "landmark")
+	private String landmark;
+
 	@Column(name = "pin_code")
 	private String pinCode;
 
@@ -57,6 +62,10 @@ public class Address {
 	@Column(name = "alternate_phone")
 	private String alternatePhone;
 
+<<<<<<< HEAD
+=======
+	@JsonBackReference
+>>>>>>> bugfix
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
@@ -64,14 +73,20 @@ public class Address {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
 	private List<Order> orders = new ArrayList<>();
 
+<<<<<<< HEAD
 	public Address(String name, String state, String city, String locality, String addressLine, String pinCode,
 			String phone, String alternatePhone, Customer customer) {
+=======
+	public Address(String name, String state, String city, String locality, String addressLine, String landmark,
+			String pinCode, String phone, String alternatePhone, Customer customer) {
+>>>>>>> bugfix
 		super();
 		this.name = name;
 		this.state = state;
 		this.city = city;
 		this.locality = locality;
 		this.addressLine = addressLine;
+		this.landmark = landmark;
 		this.pinCode = pinCode;
 		this.phone = phone;
 		this.alternatePhone = alternatePhone;

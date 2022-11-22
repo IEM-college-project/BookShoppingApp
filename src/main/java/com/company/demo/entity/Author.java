@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,6 +39,7 @@ public class Author {
 	@Column(name = "author_email")
 	private String authorEmail;
 
+	@JsonBackReference
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "authors")
 	private List<Book> books = new ArrayList<>();
 
