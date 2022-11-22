@@ -12,4 +12,6 @@ public interface AuthorService {
 
 	public Author readAuthorById(Long authorId) throws EntityNotFoundException;
 
+	public Author readAuthorByEmail(String authorEmail) throws EntityNotFoundException;
+
 }

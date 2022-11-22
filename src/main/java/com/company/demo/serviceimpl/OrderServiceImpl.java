@@ -12,7 +12,6 @@ import com.company.demo.entity.Order;
 import com.company.demo.entity.OrderDetails;
 import com.company.demo.exception.EntityNotFoundException;
 import com.company.demo.exception.NoEntitiesException;
-import com.company.demo.repository.BookRepository;
 import com.company.demo.repository.OrderRepository;
 import com.company.demo.service.AddressService;
 import com.company.demo.service.BookService;
@@ -28,9 +27,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private AddressService addressService;
-
-	@Autowired
-	private BookRepository bookRepository;
 
 	@Autowired
 	private OrderRepository orderRepository;
