@@ -38,7 +38,14 @@ public class CustomWebSecurityConfiguration extends WebSecurityConfigurerAdapter
 	protected void configure(HttpSecurity http) throws Exception {
 //		super.configure(http);
 		http.csrf().ignoringAntMatchers(H2).and().headers().frameOptions().sameOrigin();
-		http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpHeaders.ALLOW).permitAll();
+		http
+			.cors().and()
+			.csrf().disable()
+			.authorizeRequests()
+			.antMatchers(HttpHeaders.ALLOW).permitAll()
+			.antMatchers("/api/book/add").hasRole("ADMIN")
+			.antMatchers(H2, "/api/auth/**", "/api/user/register", "/api/book/fetch**", "/api/author/fetch**").permitAll()
+			.anyRequest().authenticated();
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint);
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
