@@ -42,7 +42,7 @@ public class CustomWebSecurityConfiguration extends WebSecurityConfigurerAdapter
 		http.csrf().ignoringAntMatchers(H2).and().headers().frameOptions().sameOrigin();
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpHeaders.ALLOW).permitAll()
 				.antMatchers(H2, "/api/auth/**", "/api/user/register").permitAll()
-				.antMatchers("/api/book/fetch**", "/api/author/fetch**").permitAll().anyRequest().authenticated();
+				.antMatchers("/", "/api/book/fetch**", "/api/author/fetch**").permitAll().anyRequest().authenticated();
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint);
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
