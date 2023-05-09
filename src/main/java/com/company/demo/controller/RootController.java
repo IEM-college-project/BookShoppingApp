@@ -22,11 +22,11 @@ public class RootController {
 				+ "    <hr class=\"text-danger\">\r\n"
 				+ "    <h3 style=\"color: rgb(228, 101, 51);\">All Crew Members</h3>\r\n" + "    <big>\r\n"
 				+ "      <ul style=\"font-size: 20px; font-family: fira code;\">\r\n" + "        <li>Ankita De</li>\r\n"
-				+ "        <li>Arpan Ghosh</li>\r\n" + "        <li>Dipika Mondol</li>\r\n"
+				+ "        <li>Arpan Ghosh</li>\r\n" + "        <li>Dipika Mondal</li>\r\n"
 				+ "        <li>Ishani Dhar</li>\r\n" + "      </ul>\r\n" + "    </big>\r\n" + "    <b>\r\n"
 				+ "      <big style=\"font-size: 20px; font-family: fira code;\">Test all REST-API <a\r\n"
 				+ "          href=\"https://localhost:8888/swagger-ui/index.html\" style=\"text-decoration: none;\"\r\n"
-				+ "          target=\"_blank\">here</a> (N.B.: Frontend part is coming soon...)</big>\r\n"
+				+ "          target=\"_blank\">here</a> (N.B.: Frontend part is ready...)</big>\r\n"
 				+ "    </b>\r\n" + "  </div>\r\n" + "</body>\r\n" + "\r\n" + "</html>";
 	}
 
